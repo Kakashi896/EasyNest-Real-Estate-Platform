@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import Home2 from '../assets/Home2.webp';
 import Home3 from '../assets/Home3.webp';
@@ -48,7 +48,24 @@ const listings = [
 
 const PropertyCarousel = () => {
   const [startIndex, setStartIndex] = useState(0);
-  const cardsToShow = 3;
+  const [cardsToShow, setCardsToShow] = useState(3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setCardsToShow(1);
+      } else if (window.innerWidth < 1024) {
+        setCardsToShow(2);
+      } else {
+        setCardsToShow(3);
+      }
+    };
+
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handlePrev = () => {
     setStartIndex((prev) => Math.max(prev - 1, 0));
@@ -63,12 +80,11 @@ const PropertyCarousel = () => {
   return (
     <div className="py-20 px-4 lg:px-16 overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
         <div>
           <p className="uppercase text-xl font-light text-gray-500 tracking-widest mb-1">Discover</p>
-          <h2 className="text-4xl font-light">Explore your dream destination</h2>
+          <h2 className="text-3xl sm:text-4xl font-light">Explore your dream destination</h2>
         </div>
-        {/* <button className="bg-black text-white px-6 py-2 rounded-lg">View more</button> */}
       </div>
 
       {/* Carousel Wrapper */}
@@ -80,7 +96,8 @@ const PropertyCarousel = () => {
           {listings.map((item) => (
             <div
               key={item.id}
-              className="min-w-[calc(100%/3)] px-2 box-border"
+              className={`min-w-[${100 / cardsToShow}%] px-2 box-border`}
+              style={{ minWidth: `${100 / cardsToShow}%` }}
             >
               <div className="bg-white rounded-xl shadow-sm overflow-hidden relative">
                 <img
@@ -88,11 +105,9 @@ const PropertyCarousel = () => {
                   alt={item.title}
                   className="w-full h-60 object-cover rounded-t-xl"
                 />
-
                 <div className="absolute top-3 right-3 bg-white text-sm px-3 py-1 rounded-lg shadow text-gray-700">
                   {item.details}
                 </div>
-
                 <div className="p-4 flex justify-between items-center">
                   <div>
                     <h3 className="font-medium">{item.title}</h3>
