@@ -56,9 +56,9 @@ const Navbar = () => {
         <a onClick={() => handleNavClick('contact')} className="cursor-pointer hover:underline duration-200">
           Contact
         </a>
-        <button className="flex items-center gap-1 hover:underline">
-          Pages <span className="text-xs">&#9662;</span>
-        </button>
+        <a onClick={() => handleNavClick('whyUs')} className="cursor-pointer hover:underline duration-200">
+          Why Us ?
+        </a>
       </div>
 
       {/* Right: Wishlist + CTA */}

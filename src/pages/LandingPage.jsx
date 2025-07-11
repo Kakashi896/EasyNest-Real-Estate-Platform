@@ -63,7 +63,9 @@ const LandingPage = () => {
         <AboutPage />
       </div>
       <PropertyCarousel />
+      <div id='whyUs'>
       <WhyChooseUs />
+      </div>
       <div id="contact">
         <Footer />
       </div>

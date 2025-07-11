@@ -43,9 +43,9 @@ const Footer = () => {
             <input
               type="email"
               placeholder="Your email here"
-              className="px-4 py-2 text-black text-sm w-full focus:outline-none"
+              className="px-4 py-2 text-black border-2 border-black text-sm w-full focus:outline-none"
             />
-            <button className="bg-black text-white px-5 py-2 text-sm font-medium hover:bg-gray-800 w-full sm:w-auto">
+            <button className="bg-black border-2 border-black text-white px-5 py-2 text-sm font-medium hover:bg-gray-800 w-full sm:w-auto">
               Join
             </button>
           </div>
